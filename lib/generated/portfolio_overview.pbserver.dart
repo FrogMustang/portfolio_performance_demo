@@ -1,6 +1,6 @@
 // This is a generated file - do not edit.
 //
-// Generated from portfolio_chart.proto.
+// Generated from portfolio_overview.proto.
 
 // @dart = 3.3
 
@@ -15,18 +15,18 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'portfolio_chart.pb.dart' as $1;
+import 'portfolio_overview.pb.dart' as $0;
 
-export 'portfolio_chart.pb.dart';
+export 'portfolio_overview.pb.dart';
 
-abstract class PortfolioChartServiceBase extends $pb.GeneratedService {
-  $async.Future<$1.PortfolioChartResponse> getPortfolioChart(
-      $pb.ServerContext ctx, $1.PortfolioChartRequest request);
+abstract class PortfolioOverviewServiceBase extends $pb.GeneratedService {
+  $async.Future<$0.PortfolioOverviewResponse> getPortfolioOverview(
+      $pb.ServerContext ctx, $0.PortfolioOverviewRequest request);
 
   $pb.GeneratedMessage createRequest($core.String methodName) {
     switch (methodName) {
-      case 'GetPortfolioChart':
-        return $1.PortfolioChartRequest();
+      case 'GetPortfolioOverview':
+        return $0.PortfolioOverviewRequest();
       default:
         throw $core.ArgumentError('Unknown method: $methodName');
     }
@@ -35,8 +35,8 @@ abstract class PortfolioChartServiceBase extends $pb.GeneratedService {
   $async.Future<$pb.GeneratedMessage> handleCall(
       $pb.ServerContext ctx, $core.String methodName, $pb.GeneratedMessage request) {
     switch (methodName) {
-      case 'GetPortfolioChart':
-        return getPortfolioChart(ctx, request as $1.PortfolioChartRequest);
+      case 'GetPortfolioOverview':
+        return getPortfolioOverview(ctx, request as $0.PortfolioOverviewRequest);
       default:
         throw $core.ArgumentError('Unknown method: $methodName');
     }

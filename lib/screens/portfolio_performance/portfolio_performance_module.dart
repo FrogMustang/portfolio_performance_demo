@@ -8,7 +8,6 @@ class PortfolioPerformanceModule {
     await PortfolioChartApi.initializeMockServer();
   }
 
-  /// Cleanup the mock server (call this when done)
   static Future<void> dispose() async {
     await PortfolioChartApi.stopMockServer();
   }

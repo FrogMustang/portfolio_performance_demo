@@ -1,32 +1,30 @@
 import 'package:grpc/grpc.dart';
-import 'package:portfolio_performance_demo/generated/portfolio_chart.pbgrpc.dart';
+import 'package:portfolio_performance_demo/generated/portfolio_overview.pbgrpc.dart';
 import 'package:portfolio_performance_demo/screens/portfolio_performance/repository/mock_portfolio_grpc_server.dart';
 
-abstract class IPortfolioChartApi {
-  Future<PortfolioChartResponse> getPortfolioChart({
-    String? timespan,
-  });
+abstract class IPortfolioOverviewApi {
+  Future<PortfolioOverviewResponse> getPortfolioOverview();
 
   /// Close the API connection
   Future<void> close();
 }
 
-class PortfolioChartApi implements IPortfolioChartApi {
-  final PortfolioChartServiceClient? _client;
+class PortfolioOverviewApi implements IPortfolioOverviewApi {
+  final PortfolioOverviewServiceClient? _client;
   final ClientChannel? _channel;
   static MockGrpcServer? _staticMockServer;
   static int? _mockServerPort;
 
   /// Create API with existing client (useful for testing with mock client)
-  PortfolioChartApi.withClient(this._client) : _channel = null;
+  PortfolioOverviewApi.withClient(this._client) : _channel = null;
 
   /// Create API with channel connection
-  PortfolioChartApi.withChannel(ClientChannel channel)
+  PortfolioOverviewApi.withChannel(ClientChannel channel)
     : _channel = channel,
-      _client = PortfolioChartServiceClient(channel);
+      _client = PortfolioOverviewServiceClient(channel);
 
   /// Create API with host and port
-  factory PortfolioChartApi({
+  factory PortfolioOverviewApi({
     required String host,
     required int port,
     bool secure = true,
@@ -45,7 +43,7 @@ class PortfolioChartApi implements IPortfolioChartApi {
         ),
       );
 
-      return PortfolioChartApi.withChannel(channel);
+      return PortfolioOverviewApi.withChannel(channel);
     }
 
     final channel = ClientChannel(
@@ -57,18 +55,14 @@ class PortfolioChartApi implements IPortfolioChartApi {
             : const ChannelCredentials.insecure(),
       ),
     );
-    return PortfolioChartApi.withChannel(channel);
+    return PortfolioOverviewApi.withChannel(channel);
   }
 
   @override
-  Future<PortfolioChartResponse> getPortfolioChart({
-    String? timespan,
-  }) async {
-    final request = PortfolioChartRequest(
-      timespan: timespan ?? '',
-    );
+  Future<PortfolioOverviewResponse> getPortfolioOverview() async {
+    final request = PortfolioOverviewRequest();
 
-    return await _client!.getPortfolioChart(request);
+    return await _client!.getPortfolioOverview(request);
   }
 
   @override

@@ -31,8 +31,7 @@ class PortfolioChartServiceClient extends $grpc.Client {
     '',
   ];
 
-  PortfolioChartServiceClient(super.channel,
-      {super.options, super.interceptors});
+  PortfolioChartServiceClient(super.channel, {super.options, super.interceptors});
 
   /// Get portfolio chart data
   $grpc.ResponseFuture<$0.PortfolioChartResponse> getPortfolioChart(
@@ -56,20 +55,17 @@ abstract class PortfolioChartServiceBase extends $grpc.Service {
   $core.String get $name => 'portfolio.PortfolioChartService';
 
   PortfolioChartServiceBase() {
-    $addMethod($grpc.ServiceMethod<$0.PortfolioChartRequest,
-            $0.PortfolioChartResponse>(
+    $addMethod($grpc.ServiceMethod<$0.PortfolioChartRequest, $0.PortfolioChartResponse>(
         'GetPortfolioChart',
         getPortfolioChart_Pre,
         false,
         false,
-        ($core.List<$core.int> value) =>
-            $0.PortfolioChartRequest.fromBuffer(value),
+        ($core.List<$core.int> value) => $0.PortfolioChartRequest.fromBuffer(value),
         ($0.PortfolioChartResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.PortfolioChartResponse> getPortfolioChart_Pre(
-      $grpc.ServiceCall $call,
-      $async.Future<$0.PortfolioChartRequest> $request) async {
+      $grpc.ServiceCall $call, $async.Future<$0.PortfolioChartRequest> $request) async {
     return getPortfolioChart($call, await $request);
   }
 

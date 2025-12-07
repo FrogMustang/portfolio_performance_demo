@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package portfolio;
+
+// Service definition for portfolio overview
+service PortfolioOverviewService {
+  // Get portfolio overview data
+  rpc GetPortfolioOverview(PortfolioOverviewRequest) returns (PortfolioOverviewResponse);
+}
+
+// Request message for getting portfolio overview
+message PortfolioOverviewRequest {
+  // No parameters needed for now
+}
+
+// Response message that contains the portfolio overview data
+message PortfolioOverviewResponse {
+  repeated PortfolioWatchlistItem items = 1;
+}
+
+// Individual portfolio watchlist item
+message PortfolioWatchlistItem {
+  // The name of the asset
+  string name = 1;
+  
+  // The ticker symbol of the asset
+  string symbol = 2;
+  
+  // The rate of return percentage
+  double rate_of_return_percent = 3;
+  
+  // The total profit or loss amount (positive for profit, negative for loss)
+  double total_profit_loss = 4;
+  
+  // The total amount of money invested in this asset
+  double total_invested_amount = 5;
+  
+  // The number of shares currently owned
+  double shares = 6;
+}

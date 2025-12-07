@@ -19,15 +19,7 @@ import 'dart:typed_data' as $typed_data;
 const PortfolioChartRequest$json = {
   '1': 'PortfolioChartRequest',
   '2': [
-    {
-      '1': 'timespan',
-      '3': 1,
-      '4': 1,
-      '5': 9,
-      '9': 0,
-      '10': 'timespan',
-      '17': true
-    },
+    {'1': 'timespan', '3': 1, '4': 1, '5': 9, '9': 0, '10': 'timespan', '17': true},
   ],
   '8': [
     {'1': '_timespan'},
@@ -55,10 +47,9 @@ const PortfolioChartResponse$json = {
 };
 
 /// Descriptor for `PortfolioChartResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List portfolioChartResponseDescriptor =
-    $convert.base64Decode(
-        'ChZQb3J0Zm9saW9DaGFydFJlc3BvbnNlEjMKBWl0ZW1zGAEgAygLMh0ucG9ydGZvbGlvLlBvcn'
-        'Rmb2xpb0NoYXJ0SXRlbVIFaXRlbXM=');
+final $typed_data.Uint8List portfolioChartResponseDescriptor = $convert.base64Decode(
+    'ChZQb3J0Zm9saW9DaGFydFJlc3BvbnNlEjMKBWl0ZW1zGAEgAygLMh0ucG9ydGZvbGlvLlBvcn'
+    'Rmb2xpb0NoYXJ0SXRlbVIFaXRlbXM=');
 
 @$core.Deprecated('Use portfolioChartItemDescriptor instead')
 const PortfolioChartItem$json = {
@@ -80,13 +71,7 @@ const PortfolioChartItem$json = {
       '5': 1,
       '10': 'percentTimeWeightedCumulated'
     },
-    {
-      '1': 'rate_of_return_percent',
-      '3': 4,
-      '4': 1,
-      '5': 1,
-      '10': 'rateOfReturnPercent'
-    },
+    {'1': 'rate_of_return_percent', '3': 4, '4': 1, '5': 1, '10': 'rateOfReturnPercent'},
     {'1': 'total_profit_loss', '3': 5, '4': 1, '5': 1, '10': 'totalProfitLoss'},
   ],
 };

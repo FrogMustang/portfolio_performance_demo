@@ -1,9 +1,58 @@
 import 'dart:async';
 import 'package:grpc/grpc.dart';
 import 'package:portfolio_performance_demo/generated/portfolio_chart.pbgrpc.dart';
+import 'package:portfolio_performance_demo/generated/portfolio_overview.pbgrpc.dart';
 import 'package:portfolio_performance_demo/generated/google/protobuf/timestamp.pb.dart'
     as timestamp_pb;
 import 'package:portfolio_performance_demo/utils/constants.dart';
+
+/// Creates a mock gRPC server for testing
+class MockGrpcServer {
+  Server? _server;
+  int? _port;
+
+  // Shared singleton instance
+  static MockGrpcServer? _instance;
+
+  int get port => _port ?? 0;
+
+  MockGrpcServer._();
+
+  /// Get the shared instance
+  static MockGrpcServer get instance {
+    _instance ??= MockGrpcServer._();
+    return _instance!;
+  }
+
+  /// Start the mock server
+  Future<void> start() async {
+    if (_server != null && _port != null) {
+      // Server already started
+      return;
+    }
+
+    final server = Server.create(
+      services: [
+        MockPortfolioChartService(),
+        MockPortfolioOverviewService(),
+      ],
+      codecRegistry: CodecRegistry(codecs: const [GzipCodec(), IdentityCodec()]),
+    );
+
+    _server = server;
+    // Serve on a random available port
+    await server.serve(port: 0);
+    _port = server.port; // Get the actual port the server is listening on
+  }
+
+  /// Stop the mock server
+  Future<void> stop() async {
+    await _server?.shutdown();
+    _server = null;
+    _port = null;
+    _instance = null;
+  }
+}
 
 /// Mock gRPC server implementation for testing
 /// This simulates a real gRPC server and returns mock data
@@ -66,8 +115,8 @@ class MockPortfolioChartService extends PortfolioChartServiceBase {
     DateTime startDate;
 
     switch (timespan) {
-      case Constants.portfolioChartTimespanDay: // 1D: Start from today at 00:00
-        startDate = DateTime(now.year, now.month, now.day, 0, 0, 0);
+      case Constants.portfolioChartTimespanDay: // 1D: Start from 24 hours ago
+        startDate = now.subtract(const Duration(hours: 24));
         break;
       case Constants.portfolioChartTimespanWeek: // 1W: Start from 7 days ago at 00:00
         final weekAgo = now.subtract(const Duration(days: 7));
@@ -210,30 +259,126 @@ class MockPortfolioChartService extends PortfolioChartServiceBase {
   }
 }
 
-/// Creates a mock gRPC server for testing
-class MockGrpcServer {
-  Server? _server;
-  int? _port;
+/// Mock gRPC server implementation for portfolio overview
+/// This simulates a real gRPC server and returns mock data
+class MockPortfolioOverviewService extends PortfolioOverviewServiceBase {
+  @override
+  Future<PortfolioOverviewResponse> getPortfolioOverview(
+    ServiceCall call,
+    PortfolioOverviewRequest request,
+  ) async {
+    // Simulate network delay
+    await Future.delayed(const Duration(milliseconds: 500));
 
-  int get port => _port ?? 0;
+    final items = generateMockData();
 
-  /// Start the mock server
-  Future<void> start() async {
-    final server = Server.create(
-      services: [MockPortfolioChartService()],
-      codecRegistry: CodecRegistry(codecs: const [GzipCodec(), IdentityCodec()]),
-    );
-
-    _server = server;
-    // Serve on a random available port
-    await server.serve(port: 0);
-    _port = server.port; // Get the actual port the server is listening on
+    return PortfolioOverviewResponse(items: items);
   }
 
-  /// Stop the mock server
-  Future<void> stop() async {
-    await _server?.shutdown();
-    _server = null;
-    _port = null;
+  static List<PortfolioWatchlistItem> generateMockData() {
+    final List<PortfolioWatchlistItem> items = [];
+
+    // Mock data for portfolio overview with popular stocks
+    items.add(
+      PortfolioWatchlistItem()
+        ..name = 'Apple Inc.'
+        ..symbol = 'AAPL'
+        ..rateOfReturnPercent = 18.45
+        ..totalProfitLoss = 1845.50
+        ..totalInvestedAmount = 10000.0
+        ..shares = 50.0,
+    );
+
+    items.add(
+      PortfolioWatchlistItem()
+        ..name = 'Microsoft Corporation'
+        ..symbol = 'MSFT'
+        ..rateOfReturnPercent = 22.30
+        ..totalProfitLoss = 2230.00
+        ..totalInvestedAmount = 10000.0
+        ..shares = 30.0,
+    );
+
+    items.add(
+      PortfolioWatchlistItem()
+        ..name = 'Alphabet Inc.'
+        ..symbol = 'GOOGL'
+        ..rateOfReturnPercent = 15.67
+        ..totalProfitLoss = 1567.00
+        ..totalInvestedAmount = 10000.0
+        ..shares = 80.0,
+    );
+
+    items.add(
+      PortfolioWatchlistItem()
+        ..name = 'Amazon.com Inc.'
+        ..symbol = 'AMZN'
+        ..rateOfReturnPercent = 12.34
+        ..totalProfitLoss = 1234.00
+        ..totalInvestedAmount = 10000.0
+        ..shares = 70.0,
+    );
+
+    items.add(
+      PortfolioWatchlistItem()
+        ..name = 'Tesla, Inc.'
+        ..symbol = 'TSLA'
+        ..rateOfReturnPercent = 28.90
+        ..totalProfitLoss = 2890.00
+        ..totalInvestedAmount = 10000.0
+        ..shares = 35.0,
+    );
+
+    items.add(
+      PortfolioWatchlistItem()
+        ..name = 'NVIDIA Corporation'
+        ..symbol = 'NVDA'
+        ..rateOfReturnPercent = 35.67
+        ..totalProfitLoss = 3567.00
+        ..totalInvestedAmount = 10000.0
+        ..shares = 25.0,
+    );
+
+    items.add(
+      PortfolioWatchlistItem()
+        ..name = 'Meta Platforms Inc.'
+        ..symbol = 'META'
+        ..rateOfReturnPercent = 19.23
+        ..totalProfitLoss = 1923.00
+        ..totalInvestedAmount = 10000.0
+        ..shares = 40.0,
+    );
+
+    items.add(
+      PortfolioWatchlistItem()
+        ..name = 'JPMorgan Chase & Co.'
+        ..symbol = 'JPM'
+        ..rateOfReturnPercent = 8.45
+        ..totalProfitLoss = 845.00
+        ..totalInvestedAmount = 10000.0
+        ..shares = 65.0,
+    );
+
+    items.add(
+      PortfolioWatchlistItem()
+        ..name = 'Visa Inc.'
+        ..symbol = 'V'
+        ..rateOfReturnPercent = 14.56
+        ..totalProfitLoss = 1456.00
+        ..totalInvestedAmount = 10000.0
+        ..shares = 45.0,
+    );
+
+    items.add(
+      PortfolioWatchlistItem()
+        ..name = 'Johnson & Johnson'
+        ..symbol = 'JNJ'
+        ..rateOfReturnPercent = 6.78
+        ..totalProfitLoss = 678.00
+        ..totalInvestedAmount = 10000.0
+        ..shares = 60.0,
+    );
+
+    return items;
   }
 }

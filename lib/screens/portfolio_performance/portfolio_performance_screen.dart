@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:portfolio_performance_demo/screens/portfolio_performance/bloc/bloc/portfolio_overview_bloc.dart';
 import 'package:portfolio_performance_demo/screens/portfolio_performance/bloc/bloc/portfolio_performance_bloc.dart';
 import 'package:portfolio_performance_demo/screens/portfolio_performance/models/portfolio_chart_timespan.dart';
 import 'package:portfolio_performance_demo/screens/portfolio_performance/widgets/portfolio_chart.dart';
+import 'package:portfolio_performance_demo/screens/portfolio_performance/widgets/portfolio_overview_list.dart';
 import 'package:portfolio_performance_demo/theme/app_colors.dart';
 import 'package:portfolio_performance_demo/theme/app_text_styles.dart';
 import 'package:portfolio_performance_demo/utils/utils.dart';
@@ -25,6 +27,9 @@ class _PortfolioPerformanceScreenState extends State<PortfolioPerformanceScreen>
       PortfolioPerformanceEvent.fetchPortfolioChart(
         timespan: PortfolioChartTimespan.day,
       ),
+    );
+    context.read<PortfolioOverviewBloc>().add(
+      const PortfolioOverviewEvent.fetchPortfolioOverview(),
     );
   }
 
@@ -132,7 +137,7 @@ class _PortfolioPerformanceScreenState extends State<PortfolioPerformanceScreen>
                       PortfolioChart(),
                       const SizedBox(height: 32),
 
-                      // Transaction History
+                      // Investments section
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -144,6 +149,9 @@ class _PortfolioPerformanceScreenState extends State<PortfolioPerformanceScreen>
                       ),
 
                       const SizedBox(height: 16),
+
+                      // Portfolio Overview List
+                      PortfolioOverviewList(),
 
                       const SizedBox(height: 24),
                     ],
