@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package portfolio;
+
+import "google/protobuf/timestamp.proto";
+
+// Service definition for portfolio chart
+service PortfolioChartService {
+  // Get portfolio chart data
+  rpc GetPortfolioChart(PortfolioChartRequest) returns (PortfolioChartResponse);
+}
+
+
+
+// Request message for getting portfolio chart
+message PortfolioChartRequest {
+  optional string timespan = 1;
+}
+
+// Response message that contains the portfolio chart data
+message PortfolioChartResponse {
+  repeated PortfolioChartItem items = 1;
+}
+
+// Individual portfolio chart item
+message PortfolioChartItem {
+  // The date of the portfolio chart item
+  google.protobuf.Timestamp date = 1;
+  
+  // The amount of the portfolio chart item
+  double amount = 2;
+  
+  // The cumulative time-weighted performance of the portfolio in percent (%) over the performance period
+  double percent_time_weighted_cumulated = 3;
+  
+  // The rate of return percentage generated until that point in time.
+  double rate_of_return_percent = 4;
+  
+  // The total profit or loss amount (positive for profit, negative for loss) made until that point in time.
+  double total_profit_loss = 5;
+}
