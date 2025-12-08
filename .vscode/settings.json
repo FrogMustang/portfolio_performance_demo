@@ -1,21 +1,22 @@
 {
-    "editor.lineHeight": 1.8,
-    "editor.fontSize": 13,
-    "editor.rulers": [
-        90
-    ],
-    "editor.wordWrapColumn": 90,
-    "dart.lineLength": 90,
-    "debug.console.fontSize": 14,
-    "terminal.integrated.fontSize": 14,
-    "terminal.integrated.lineHeight": 1.5,
-    "protoc": {
-        "path": "/opt/homebrew/bin/protoc",
-        "compile_on_save": true,
-        "options": [
-            "--proto_path=${workspaceRoot}/lib/protos",
-            "--proto_path=/opt/homebrew/Cellar/protobuf/33.1/include",
-            "--dart_out=grpc:${workspaceRoot}/lib/generated"
-        ]
-    },
+  "editor.lineHeight": 1.8,
+  "editor.fontSize": 13,
+  "editor.rulers": [
+    90
+  ],
+  "editor.wordWrapColumn": 90,
+  "dart.lineLength": 90,
+  "debug.console.fontSize": 14,
+  "terminal.integrated.fontSize": 14,
+  "terminal.integrated.lineHeight": 1.5,
+  "protoc": {
+    "path": "/opt/homebrew/bin/protoc",
+    "compile_on_save": true,
+    "options": [
+      "--proto_path=${workspaceRoot}/lib/protos",
+      "--proto_path=/opt/homebrew/Cellar/protobuf/33.1/include",
+      "--dart_out=grpc:${workspaceRoot}/lib/generated"
+    ]
+  },
+  "dart.flutterSdkPath": ".fvm/versions/3.38.3"
 }
