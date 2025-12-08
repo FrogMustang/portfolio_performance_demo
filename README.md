@@ -1,16 +1,22 @@
 # portfolio_performance_demo
 
-A new Flutter project.
+This project was created to showcase a very basic portfolio overview chart that the user can interacti with and display detailed data.
 
-## Getting Started
+## Features I've worked on:
+For a detailed list of apps and features I've worked on, please check out my [LinkedIn](https://www.linkedin.com/in/madalin-broscareanu-62a7511a2/)
 
-This project is a starting point for a Flutter application.
+## Purpose
+The purpose of the project was to implement a portfolio overview demo, where the user can see some plotted chart data about a mocked portfolio and interacti with it. Moreover, I aimed for a high code coverage and tried my bes to test it well.
 
-A few resources to get you started if this is your first Flutter project:
+## Challenges
+Had a bit of a struggle with using gRPC and Protos since the experience of using packages like Freezed or JsonSerializable are more smooth
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## How to run
+I suggest using [FVM](https://fvm.app/documentation/getting-started/installation) to run the app using Flutter 3.38.3 for the best experience.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Can't build the project?
+If you don't have the environment to run the code, here is a video and some screenshots of what it looks like:
+
+#### Video
+
+### Screenshots

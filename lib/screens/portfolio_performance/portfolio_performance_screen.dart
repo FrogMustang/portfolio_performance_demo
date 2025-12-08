@@ -62,7 +62,7 @@ class _PortfolioPerformanceScreenState extends State<PortfolioPerformanceScreen>
                     children: [
                       RoundIconButton(
                         onPressed: () {
-                          Utils.showSnackbar(context, 'Back button pressed');
+                          Utils.showSnackbar(context, 'Search button pressed');
                         },
                         icon: Icons.search_rounded,
                       ),
@@ -70,7 +70,7 @@ class _PortfolioPerformanceScreenState extends State<PortfolioPerformanceScreen>
 
                       RoundIconButton(
                         onPressed: () {
-                          Utils.showSnackbar(context, 'Search button pressed');
+                          Utils.showSnackbar(context, 'Notifications button pressed');
                         },
                         icon: Icons.notifications_outlined,
                       ),
