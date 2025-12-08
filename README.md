@@ -18,5 +18,8 @@ I suggest using [FVM](https://fvm.app/documentation/getting-started/installation
 If you don't have the environment to run the code, here is a video and some screenshots of what it looks like:
 
 #### Video
+https://youtube.com/shorts/vlAxRsZOU-A
 
 ### Screenshots
+<img width="400" src="https://github.com/user-attachments/assets/9e4cfb3e-ccd0-4d73-82be-bfa1886a22e4" />
+<img width="400" src="https://github.com/user-attachments/assets/4c0d615b-cd2b-4a13-ad57-540cb7ef6751" />
