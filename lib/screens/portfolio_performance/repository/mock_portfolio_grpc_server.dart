@@ -81,32 +81,32 @@ class MockPortfolioChartService extends PortfolioChartServiceBase {
 
     switch (timespan) {
       case Constants.portfolioChartTimespanDay: // 1D
-        numberOfPoints = 24;
+        numberOfPoints = Constants.portfolioChartMaxPointsDay;
         samplingInterval = const Duration(hours: 1);
         break;
       case Constants.portfolioChartTimespanWeek: // 1W
-        numberOfPoints = 7;
+        numberOfPoints = Constants.portfolioChartMaxPointsWeek;
         samplingInterval = const Duration(days: 1);
         break;
       case Constants.portfolioChartTimespanMonth: // 1M
-        numberOfPoints = 30;
+        numberOfPoints = Constants.portfolioChartMaxPointsMonth;
         samplingInterval = const Duration(days: 1);
         break;
       case Constants.portfolioChartTimespanThreeMonths: // 3M
-        numberOfPoints = 90;
+        numberOfPoints = Constants.portfolioChartMaxPointsThreeMonths;
         samplingInterval = const Duration(days: 1);
         break;
       case Constants.portfolioChartTimespanYear: // 1Y
-        numberOfPoints = 52;
+        numberOfPoints = Constants.portfolioChartMaxPointsYear;
         samplingInterval = const Duration(days: 7);
         break;
       case Constants.portfolioChartTimespanFiveYears: // 5Y
-        numberOfPoints = 60;
+        numberOfPoints = Constants.portfolioChartMaxPointsFiveYears;
         samplingInterval = const Duration(days: 30);
         break;
       default:
         // Default to 1M if timespan is not recognized
-        numberOfPoints = 30;
+        numberOfPoints = Constants.portfolioChartMaxPointsMonth;
         samplingInterval = const Duration(days: 1);
     }
 

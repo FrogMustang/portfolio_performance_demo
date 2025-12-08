@@ -26,18 +26,19 @@ void main() {
     });
 
     test('getPortfolioChart returns data from API', () async {
+      final now = DateTime.now();
       final mockResponse = PortfolioChartResponse(
         items: [
           PortfolioChartItem(
             date: timestamp_pb.Timestamp.fromDateTime(
-              DateTime(2021, 1, 1),
+              now.subtract(const Duration(days: 2)),
             ),
             amount: 100000.0,
             percentTimeWeightedCumulated: 5.5,
           ),
           PortfolioChartItem(
             date: timestamp_pb.Timestamp.fromDateTime(
-              DateTime(2021, 1, 2),
+              now.subtract(const Duration(days: 1)),
             ),
             amount: 105000.0,
             percentTimeWeightedCumulated: 10.0,

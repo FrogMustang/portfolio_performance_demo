@@ -311,6 +311,20 @@ void main() {
           expect('${split[0]}${split[1]}', formatted);
         }
       });
+
+      test('handles values that round to whole numbers', () {
+        // Should round to 100
+        final result = AmountFormatter.splitFormattedAmount(99.999);
+        expect(result.length, 2);
+        expect(result[0], '100');
+        expect(result[1], '.00');
+
+        // should not round to 100
+        final result2 = AmountFormatter.splitFormattedAmount(99.994);
+        expect(result2.length, 2);
+        expect(result2[0], '99');
+        expect(result2[1], '.99');
+      });
     });
   });
 }

@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:portfolio_performance_demo/screens/portfolio_performance/bloc/bloc/portfolio_performance_bloc.dart';
 import 'package:portfolio_performance_demo/screens/portfolio_performance/models/portfolio_chart_item.dart';
+import 'package:portfolio_performance_demo/screens/portfolio_performance/models/portfolio_chart_timespan.dart';
 import 'package:portfolio_performance_demo/theme/app_colors.dart';
 import 'package:portfolio_performance_demo/theme/app_text_styles.dart';
 import 'package:portfolio_performance_demo/utils/amount_formatter.dart';
 
 class ChartDetailsWidget extends StatelessWidget {
   final PortfolioChartItem point;
+  final PortfolioChartTimespan timespan;
 
   const ChartDetailsWidget({
     super.key,
     required this.point,
+    required this.timespan,
   });
 
   @override
@@ -77,8 +78,6 @@ class ChartDetailsWidget extends StatelessWidget {
     AppTextStyles textStyles,
     AppColors colors,
   ) {
-    final timespan = context.watch<PortfolioPerformanceBloc>().state.timespan;
-
     final isProfit = point.totalProfitLoss >= 0;
     final profitLossColor = isProfit ? colors.positiveColor : colors.negativeColor;
 

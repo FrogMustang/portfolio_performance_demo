@@ -15,9 +15,6 @@ class PortfolioOverviewApi implements IPortfolioOverviewApi {
   static MockGrpcServer? _staticMockServer;
   static int? _mockServerPort;
 
-  /// Create API with existing client (useful for testing with mock client)
-  PortfolioOverviewApi.withClient(this._client) : _channel = null;
-
   /// Create API with channel connection
   PortfolioOverviewApi.withChannel(ClientChannel channel)
     : _channel = channel,

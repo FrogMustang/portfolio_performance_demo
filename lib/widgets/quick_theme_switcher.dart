@@ -17,9 +17,7 @@ class QuickThemeSwitcher extends StatelessWidget {
 
         return FloatingActionButton(
           onPressed: () {
-            // Toggle between neobank and retailBank
-            final newTheme = isNeobank ? AppThemeMode.retailBank : AppThemeMode.neobank;
-            context.read<ThemeBloc>().add(ChangeTheme(newTheme));
+            context.read<ThemeBloc>().add(ToggleTheme());
           },
           backgroundColor: colors.buttonPrimary,
           child: Icon(

@@ -29,8 +29,6 @@ class PortfolioOverviewBloc extends Bloc<PortfolioOverviewEvent, PortfolioOvervi
 
       final portfolioOverviewData = await repository.getPortfolioOverview();
 
-      // throw Exception('Failed to fetch portfolio overview');
-
       emit(
         state.copyWith(
           data: portfolioOverviewData,

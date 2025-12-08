@@ -14,9 +14,10 @@ class PortfolioOverviewData {
     );
   }
 
-  pb.PortfolioOverviewResponse toProto() {
-    return pb.PortfolioOverviewResponse(
-      items: items.map((item) => item.toProto()).toList(),
-    );
-  }
+  // uncomment if needed
+  // pb.PortfolioOverviewResponse toProto() {
+  //   return pb.PortfolioOverviewResponse(
+  //     items: items.map((item) => item.toProto()).toList(),
+  //   );
+  // }
 }

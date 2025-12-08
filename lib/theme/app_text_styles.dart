@@ -162,13 +162,13 @@ class AppTextStyles extends ThemeExtension<AppTextStyles> {
     return AppTextStyles(
       displayLarge: GoogleFonts.inter(
         fontSize: 57,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w900,
         color: textPrimary,
         letterSpacing: -0.25,
       ),
       displayMedium: GoogleFonts.inter(
         fontSize: 45,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w700,
         color: textPrimary,
       ),
       displaySmall: GoogleFonts.inter(

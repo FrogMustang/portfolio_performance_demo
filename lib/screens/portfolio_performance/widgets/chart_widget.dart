@@ -1,5 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:portfolio_performance_demo/screens/portfolio_performance/bloc/bloc/portfolio_performance_bloc.dart';
 import 'package:portfolio_performance_demo/screens/portfolio_performance/models/portfolio_chart_item.dart';
 import 'package:portfolio_performance_demo/screens/portfolio_performance/widgets/chart_date_tooltip.dart';
 import 'package:portfolio_performance_demo/screens/portfolio_performance/widgets/chart_details_card.dart';
@@ -85,8 +87,13 @@ class _ChartWidgetState extends State<ChartWidget> {
         children: [
           // Header with details
           if (touchedIndex != null && touchedIndex! < widget.data.length)
-            ChartDetailsWidget(
-              point: widget.data[touchedIndex!],
+            BlocBuilder<PortfolioPerformanceBloc, PortfolioPerformanceState>(
+              builder: (context, state) {
+                return ChartDetailsWidget(
+                  point: widget.data[touchedIndex!],
+                  timespan: state.timespan,
+                );
+              },
             ),
           const SizedBox(height: 50),
 
@@ -298,16 +305,34 @@ class _ChartWidgetState extends State<ChartWidget> {
                     ),
                   ),
 
-                  // Date tooltip at the top of the touch indicator (only when actively touching)
+                  // Date tooltip at the top of the touch indicator
                   if (isActivelyTouching &&
                       touchedIndex != null &&
                       touchedIndex! < widget.data.length)
                     Positioned(
-                      left:
-                          (touchedIndex! *
-                                  (MediaQuery.of(context).size.width - 80) /
-                                  widget.data.length)
-                              .clamp(20.0, MediaQuery.of(context).size.width - 140),
+                      left: () {
+                        // Calculate the touch point X position
+                        final touchPointX =
+                            touchedIndex! *
+                            (MediaQuery.of(context).size.width - 80) /
+                            widget.data.length;
+
+                        // Estimate tooltip width (date format "E, d MMM HH:mm" with padding)
+                        // Roughly 150px
+                        const estimatedTooltipWidth = 150.0;
+
+                        // Center the tooltip on the touch point
+                        var tooltipLeft = touchPointX - (estimatedTooltipWidth / 2);
+
+                        // Clamp to ensure tooltip stays within screen bounds
+                        final screenWidth = MediaQuery.of(context).size.width;
+                        tooltipLeft = tooltipLeft.clamp(
+                          0,
+                          screenWidth - estimatedTooltipWidth,
+                        );
+
+                        return tooltipLeft;
+                      }(),
                       top: -50, // Position above the chart
                       child: ChartDateTooltip(point: widget.data[touchedIndex!]),
                     ),

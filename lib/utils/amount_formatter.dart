@@ -26,8 +26,6 @@ class AmountFormatter {
   /// Format amount with thousands separators
   /// Returns formatted string like "11,729.85" or "100,000,000.00"
   static String formatAmountWithCurrency(double value) {
-    // Use a pattern that handles any size number with thousands separators
-    // The pattern #,##0.00 automatically handles all thousands groups
     final formatter = NumberFormat('#,##0.00', 'en_US');
     return formatter.format(value);
   }
@@ -39,11 +37,6 @@ class AmountFormatter {
     final formatted = formatAmountWithCurrency(value);
     final parts = formatted.split('.');
 
-    if (parts.length == 2) {
-      return [parts[0], '.${parts[1]}'];
-    } else {
-      // no decimal point present
-      return [formatted, ''];
-    }
+    return [parts[0], '.${parts[1]}'];
   }
 }
